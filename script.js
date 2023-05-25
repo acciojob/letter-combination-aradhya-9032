@@ -1,50 +1,20 @@
-// function letterCombinations(input_digit) {
-//   //Complete the function
-// }
+let com = [0,1'abc','def','ghi','jkl','mno','pqrs','tuv','wxyz'];
 
-// module.exports = letterCombinations;
-
-
-function letterCombinations(digits) {
-  const mapping = {
-    0: "0",
-    1: "1",
-    2: "abc",
-    3: "def",
-    4: "ghi",
-    5: "jkl",
-    6: "mno",
-    7: "pqrs",
-    8: "tuv",
-    9: "wxyz",
-  };
-  
-  const combinations = [];
-  
-  if (digits.length === 0) {
-    return combinations;
-  }
-  
-  backtrack("", digits);
-  
-  return combinations;
-
-  function backtrack(current, remaining) {
-    if (remaining.length === 0) {
-      combinations.push(current);
-      return;
-    }
-    
-    const digit = remaining[0];
-    const letters = mapping[digit];
-    
-    for (let i = 0; i < letters.length; i++) {
-      const letter = letters[i];
-      backtrack(current + letter, remaining.slice(1));
-    }
-  }
+function f(ques,comb,res){
+	if(ques.length==0){
+		res.push(comb);
+		return;
+	}
+	let dig = parseInt(ques[0]);
+	let curStr = com[dig];
+	for(let i=0;i<curStr.length;i++){
+		let curChar = curStr[i];
+		f(ques,substring(1),comb+curChar,res);
+	}
 }
-
-// Example usage
-// console.log(letterCombinations("23")); // Output: ["ad", "ae", "af", "bd", "be", "bf", "cd", "ce", "cf"]
-
+function letterCombinations(input_digit){
+	let res=[];
+	f(input_digit,"",res);
+	return res;
+}
+module.exports =letterCombinations;
